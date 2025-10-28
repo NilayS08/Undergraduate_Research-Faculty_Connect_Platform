@@ -2,23 +2,14 @@ import streamlit as st
 import mysql.connector
 from db import get_connection
 
-if "user" not in st.session_state or st.session_state["user"] is None:
-    st.error("⚠️ Please log in again — no user session found.")
-    st.stop()
-
-st.markdown("<h1 style='text-align:center; color:#1e3a8a;'>🎓 Student Dashboard</h1>", unsafe_allow_html=True)
-
 st.set_page_config(page_title="Research Connect", layout="wide")
 
-try:
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-except Exception as e:
-    st.error(f"Database connection failed: {e}")
+# Check if user is logged in FIRST
+if "user" not in st.session_state or st.session_state["user"] is None:
+    st.error("⚠️ Please log in first.")
     st.stop()
-    
 
-# Add background + card style once
+# Add background + card style
 st.markdown("""
 <style>
 .stApp {
@@ -41,11 +32,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Connect to DB
-conn = get_connection()
-cursor = conn.cursor(dictionary=True)
+st.markdown("<h1 style='text-align:center; color:#1e3a8a;'>🎓 Student Dashboard</h1>", unsafe_allow_html=True)
 
-student_id = st.session_state.get("user_id")  # assuming you stored it on login
+try:
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+except Exception as e:
+    st.error(f"Database connection failed: {e}")
+    st.stop()
+
+# Get student_id from session state
+student_id = st.session_state.get("user_id")
 
 if not student_id:
     st.warning("⚠️ Please log in again — no user session found.")
@@ -71,6 +68,7 @@ if st.button("💾 Update Profile"):
     )
     conn.commit()
     st.success("Profile updated!")
+    st.rerun()
 st.markdown("</div>", unsafe_allow_html=True)
 
 # --- SKILLS CARD ---
@@ -94,6 +92,47 @@ if st.button("Update Skills"):
         cursor.execute("INSERT INTO Student_Skills (student_id, skill_id) VALUES (%s, %s)", (student_id, skill_map[skill]))
     conn.commit()
     st.success("Skills updated!")
+    st.rerun()
+st.markdown("</div>", unsafe_allow_html=True)
+
+# --- MY APPLICATIONS ---
+st.markdown("<div class='card'><h3>📝 My Applications</h3>", unsafe_allow_html=True)
+cursor.execute("""
+    SELECT a.application_id, a.status, a.applied_at, p.title, p.project_id,
+           f.first_name, f.last_name
+    FROM Applications a
+    JOIN Research_Projects p ON a.project_id = p.project_id
+    JOIN Faculty f ON p.faculty_id = f.faculty_id
+    WHERE a.student_id = %s
+    ORDER BY a.applied_at DESC
+""", (student_id,))
+applications = cursor.fetchall()
+
+if not applications:
+    st.info("You haven't applied to any projects yet.")
+else:
+    for app in applications:
+        status_color = {
+            'Pending': '🟡',
+            'Accepted': '✅',
+            'Rejected': '❌',
+            'Withdrawn': '⚪'
+        }.get(app['status'], '⚪')
+        
+        st.markdown(f"""
+        **{app['title']}** {status_color} *{app['status']}*  
+        Faculty: {app['first_name']} {app['last_name']}  
+        Applied: {app['applied_at'].strftime('%Y-%m-%d')}
+        """)
+        
+        if app['status'] == 'Pending':
+            if st.button("🗑️ Withdraw", key=f"withdraw_{app['application_id']}"):
+                cursor.execute("UPDATE Applications SET status='Withdrawn' WHERE application_id=%s", (app['application_id'],))
+                conn.commit()
+                st.success("Application withdrawn.")
+                st.rerun()
+        st.divider()
+
 st.markdown("</div>", unsafe_allow_html=True)
 
 # --- AVAILABLE PROJECTS (CARD GRID) ---
@@ -119,13 +158,27 @@ else:
                     <p style='margin-top:10px;'>{proj['description'][:160]}...</p>
                 </div>
             """, unsafe_allow_html=True)
-            if st.button("📩 Apply", key=f"apply_{proj['project_id']}"):
-                cursor.execute("""
-                    INSERT IGNORE INTO Applications (student_id, project_id, status)
-                    VALUES (%s, %s, 'Pending')
-                """, (student_id, proj["project_id"]))
-                conn.commit()
-                st.success("Application submitted!")
-                st.rerun()
+            
+            # Check if already applied
+            cursor.execute("""
+                SELECT application_id FROM Applications 
+                WHERE student_id=%s AND project_id=%s
+            """, (student_id, proj["project_id"]))
+            already_applied = cursor.fetchone()
+            
+            if already_applied:
+                st.info("✓ Already applied")
+            else:
+                if st.button("📩 Apply", key=f"apply_{proj['project_id']}"):
+                    try:
+                        cursor.execute("""
+                            INSERT INTO Applications (student_id, project_id, status)
+                            VALUES (%s, %s, 'Pending')
+                        """, (student_id, proj["project_id"]))
+                        conn.commit()
+                        st.success("Application submitted!")
+                        st.rerun()
+                    except mysql.connector.IntegrityError:
+                        st.warning("You've already applied to this project.")
 
 conn.close()

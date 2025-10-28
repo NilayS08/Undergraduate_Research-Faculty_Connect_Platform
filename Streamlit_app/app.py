@@ -30,11 +30,23 @@ with tab1:
             try:
                 user = verify_user(email, password, role)
                 if user:
-                    st.success(f"✅ Welcome {user['first_name']} {user['last_name']}!")
+                    # Store user info in session state
                     st.session_state['user'] = user
                     st.session_state['role'] = role.lower()
-                    # Redirect to correct dashboard
-                    st.switch_page(f"pages/{role.title()}_Dashboard.py")
+                    
+                    # Store user_id based on role
+                    if role.lower() == "student":
+                        st.session_state['user_id'] = user['student_id']
+                    elif role.lower() == "faculty":
+                        st.session_state['user_id'] = user['faculty_id']
+                    elif role.lower() == "admin":
+                        st.session_state['user_id'] = user['admin_id']
+                    
+                    st.success(f"✅ Welcome {user['first_name']} {user['last_name']}!")
+                    st.info("🔄 Redirecting to dashboard...")
+                    
+                    # Use st.rerun() to refresh and trigger navigation
+                    st.rerun()
                 else:
                     st.error("❌ Invalid credentials or account not found.")
             except Exception as e:
@@ -82,3 +94,18 @@ with tab2:
                 st.error(f"❌ Database error: {e}")
             finally:
                 conn.close()
+
+
+# ======================================================
+# 🔀 AUTO-REDIRECT AFTER LOGIN
+# ======================================================
+# Check if user is logged in and redirect to appropriate dashboard
+if 'user' in st.session_state and st.session_state.get('user') is not None:
+    role = st.session_state.get('role', '').lower()
+    
+    if role == "student":
+        st.switch_page("pages/Student_Dashboard.py")
+    elif role == "faculty":
+        st.switch_page("pages/Faculty_Dashboard.py")
+    elif role == "admin":
+        st.switch_page("pages/Admin_Dashboard.py")

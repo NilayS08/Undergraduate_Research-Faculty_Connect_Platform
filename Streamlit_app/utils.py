@@ -1,16 +1,23 @@
-import bcrypt
-import pymysql
-from db import get_connection
+import mysql.connector
+from mysql.connector import Error
+import bcrypt  # Import bcrypt for secure password hashing and verification
 
-
-def hash_password(password: str) -> str:
-    """Return a bcrypt hash of the password."""
+def hash_password(password):
+    # Hash the password using bcrypt
     salt = bcrypt.gensalt()
-    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
-    return hashed.decode('utf-8')
+    return bcrypt.hashpw(password.encode(), salt).decode()
+
+def verify_password(input_password, stored_password):
+    # Verify the input password against the stored hashed password
+    return bcrypt.checkpw(input_password.encode(), stored_password.encode())
 
 def get_user_by_email(email: str, role: str):
-    conn = get_connection()
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="thisbelongstome",
+        database="researchhub"
+    )
     if not conn:
         return None
     cursor = conn.cursor(dictionary=True)
@@ -22,35 +29,35 @@ def get_user_by_email(email: str, role: str):
 
 def verify_user(email: str, password: str, role: str):
     """Verify user login by comparing bcrypt hashes."""
-    conn = get_connection()
-
-    # ✅ Use DictCursor so results come as dictionaries
-    cursor = conn.cursor(pymysql.cursors.DictCursor)
-
-    table = {
-        "student": "Students",
-        "faculty": "Faculty",
-        "admin": "Admin"
-    }.get(role.lower())
-
-    if not table:
-        conn.close()
-        return None
-
-    # ✅ Fetch user details
-    cursor.execute(f"SELECT * FROM {table} WHERE email=%s", (email,))
-    user = cursor.fetchone()
-    conn.close()
-
-    if not user:
-        return None
-
-    # ✅ Compare bcrypt hashes safely
     try:
-        if bcrypt.checkpw(password.encode('utf-8'), user["password"].encode('utf-8')):
-            return user
-        else:
+        conn = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="thisbelongstome",
+            database="researchhub"
+        )
+        if conn.is_connected():
+            cursor = conn.cursor(dictionary=True)
+            table = "Students" if role == "Student" else "Faculty" if role == "Faculty" else "Admins"
+
+            # ✅ Query to fetch user by email
+            query = f"SELECT * FROM {table} WHERE email=%s"
+            cursor.execute(query, (email,))
+            user = cursor.fetchone()
+
+            if user:
+                # ✅ Verify the input password with the stored hashed password
+                if verify_password(password, user["password"]):
+                    return user
+                else:
+                    print("❌ Password mismatch.")
+            else:
+                print("❌ User not found.")
             return None
-    except Exception as e:
-        print("Password check failed:", e)
+    except Error as e:
+        print(f"❌ Error verifying user: {e}")
         return None
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close()
