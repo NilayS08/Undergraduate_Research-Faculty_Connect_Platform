@@ -7,8 +7,7 @@ def get_connection():
             host="localhost",
             user="root",
             password="thisbelongstome",
-            database="researchhub",
-            cursor = conn.cursor(dictionary=True)
+            database="researchhub"
         )
         if conn.is_connected():
             print("✅ MySQL connection successful!")
@@ -16,3 +15,4 @@ def get_connection():
     except Error as e:
         print("❌ Database connection failed:", e)
         return None
+    
