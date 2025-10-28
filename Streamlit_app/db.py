@@ -1,14 +1,18 @@
 import mysql.connector
-import streamlit as st
+from mysql.connector import Error
 
 def get_connection():
     try:
-        return mysql.connector.connect(
+        conn = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="thisbelongstome",  # change this
-            database="researchhub"
+            password="thisbelongstome",
+            database="researchhub",
+            cursor = conn.cursor(dictionary=True)
         )
-    except mysql.connector.Error as e:
-        st.error(f"Database connection failed: {e}")
+        if conn.is_connected():
+            print("✅ MySQL connection successful!")
+            return conn
+    except Error as e:
+        print("❌ Database connection failed:", e)
         return None

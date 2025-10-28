@@ -222,3 +222,74 @@ DELIMITER ;
 -- Test credentials:
 -- Student: jane.doe@univ.edu / student123
 -- Faculty: john.smith@univ.edu / faculty123
+
+USE researchhub;
+-- ===============================
+-- ADMIN
+-- ===============================
+INSERT INTO Admin (first_name, last_name, email)
+VALUES ('Alice', 'Johnson', 'alice.johnson@univ.edu');
+
+-- ===============================
+-- FACULTY
+-- ===============================
+INSERT INTO Faculty (first_name, last_name, department, research_areas, email, password, admin_id)
+VALUES
+('John', 'Smith', 'Computer Science', 'AI, ML, Data Science', 'john.smith@univ.edu', 'faculty123', 1),
+('Emily', 'Taylor', 'Biotechnology', 'Genomics, Cell Biology', 'emily.taylor@univ.edu', 'faculty123', 1);
+
+-- ===============================
+-- STUDENTS
+-- ===============================
+INSERT INTO Students (first_name, last_name, major, gpa, year_level, research_interests, email, password, admin_id)
+VALUES
+('Jane', 'Doe', 'Computer Science', 3.8, 3, 'AI, NLP, Data Science', 'jane.doe@univ.edu', 'student123', 1),
+('Mark', 'Lee', 'Biotechnology', 3.5, 2, 'Genetics, Lab Automation', 'mark.lee@univ.edu', 'student123', 1),
+('Aditi', 'Sharma', 'Mechanical Engineering', 3.7, 4, 'Robotics, Mechatronics', 'aditi.sharma@univ.edu', 'student123', 1);
+
+-- ===============================
+-- SKILLS
+-- ===============================
+INSERT INTO Skills (skill_name, category)
+VALUES
+('Python', 'Programming'),
+('Machine Learning', 'AI'),
+('Data Analysis', 'Analytical'),
+('Robotics', 'Engineering'),
+('Genetics', 'Biology');
+
+-- ===============================
+-- PROJECTS
+-- ===============================
+INSERT INTO Research_Projects (title, description, status, max_students, faculty_id, admin_id)
+VALUES
+('AI for Healthcare', 'Applying AI for medical imaging and disease prediction.', 'Recruiting', 5, 1, 1),
+('Genetic Analysis Tool', 'Developing bioinformatics pipelines for genome sequencing.', 'Recruiting', 3, 2, 1),
+('Smart Robotics System', 'Designing a modular robot for lab automation.', 'In Progress', 4, 1, 1);
+
+-- ===============================
+-- PROJECT_SKILLS
+-- ===============================
+INSERT INTO Project_Skills (project_id, skill_id)
+VALUES
+(1, 1), (1, 2), (1, 3),
+(2, 5),
+(3, 1), (3, 4);
+
+-- ===============================
+-- STUDENT_SKILLS
+-- ===============================
+INSERT INTO Student_Skills (student_id, skill_id)
+VALUES
+(1, 1), (1, 2), (1, 3),
+(2, 5),
+(3, 4), (3, 1);
+
+-- ===============================
+-- APPLICATIONS
+-- ===============================
+INSERT INTO Applications (status, cover_letter, student_id, project_id)
+VALUES
+('Pending', 'Passionate about AI in healthcare.', 1, 1),
+('Accepted', 'Background in genetics and bioinformatics.', 2, 2),
+('Pending', 'Interested in robotic systems.', 3, 3);

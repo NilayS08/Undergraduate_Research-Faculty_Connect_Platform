@@ -1,11 +1,13 @@
 import bcrypt
+import pymysql
 from db import get_connection
 
-def hash_password(password: str) -> str:
-    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
-def check_password(plain_password: str, hashed_password: str) -> bool:
-    return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8"))
+def hash_password(password: str) -> str:
+    """Return a bcrypt hash of the password."""
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed.decode('utf-8')
 
 def get_user_by_email(email: str, role: str):
     conn = get_connection()
@@ -19,9 +21,36 @@ def get_user_by_email(email: str, role: str):
     return user
 
 def verify_user(email: str, password: str, role: str):
-    user = get_user_by_email(email, role)
-    if user and "password" in user and check_password(password, user["password"]):
-        return user
-    elif user and "password" not in user:  # admin without password
-        return user
-    return None
+    """Verify user login by comparing bcrypt hashes."""
+    conn = get_connection()
+
+    # ✅ Use DictCursor so results come as dictionaries
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+
+    table = {
+        "student": "Students",
+        "faculty": "Faculty",
+        "admin": "Admin"
+    }.get(role.lower())
+
+    if not table:
+        conn.close()
+        return None
+
+    # ✅ Fetch user details
+    cursor.execute(f"SELECT * FROM {table} WHERE email=%s", (email,))
+    user = cursor.fetchone()
+    conn.close()
+
+    if not user:
+        return None
+
+    # ✅ Compare bcrypt hashes safely
+    try:
+        if bcrypt.checkpw(password.encode('utf-8'), user["password"].encode('utf-8')):
+            return user
+        else:
+            return None
+    except Exception as e:
+        print("Password check failed:", e)
+        return None
