@@ -9,30 +9,38 @@ if "user" not in st.session_state or st.session_state["user"] is None:
     st.error("⚠️ Please log in first.")
     st.stop()
 
+# Check if user is student
+if st.session_state.get("role") != "student":
+    st.error("⚠️ Access denied. Student privileges required.")
+    st.stop()
+
 # Add background + card style
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(135deg, #f0f4f8, #e9eef5);
+    background: #000000;
 }
 .card {
-    background-color: #ffffff;
+    background-color: #1a1a1a;
     border-radius: 15px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 8px rgba(255,255,255,0.08);
     padding: 22px;
     margin: 12px 0;
     transition: all 0.3s ease-in-out;
     border-left: 6px solid #2563eb;
 }
-.card:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.12); transform: translateY(-4px); }
-.card h3 { color: #1e3a8a; font-weight: 700; font-size: 20px; margin-bottom: 4px; }
-.card small { color: #6b7280; font-size: 13px; }
+.card:hover { box-shadow: 0 6px 16px rgba(255,255,255,0.12); transform: translateY(-4px); }
+.card h3 { color: #60a5fa; font-weight: 700; font-size: 20px; margin-bottom: 4px; }
+.card small { color: #9ca3af; font-size: 13px; }
+.card p { color: #d1d5db; }
 .stButton>button { background-color:#2563eb; color:white; border-radius:8px; padding:8px 20px; border:none; font-weight:500; margin-top:8px; }
 .stButton>button:hover { background-color:#1d4ed8; transform: scale(1.02); }
+h1, h2, h3 { color: #60a5fa !important; }
+p, label { color: #d1d5db !important; }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align:center; color:#1e3a8a;'>🎓 Student Dashboard</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center; color:#60a5fa;'>🎓 Student Dashboard</h1>", unsafe_allow_html=True)
 
 try:
     conn = get_connection()
@@ -50,16 +58,20 @@ if not student_id:
 
 # --- PROFILE CARD ---
 cursor.execute("SELECT * FROM Students WHERE student_id=%s", (student_id,))
-student = cursor.fetchone() or {}
+student = cursor.fetchone()
+
+if not student:
+    st.error("Student profile not found. Please complete your profile.")
+    student = {}
 
 st.markdown("<div class='card'><h3>🧾 My Profile</h3>", unsafe_allow_html=True)
 col1, col2 = st.columns(2)
 with col1:
-    major = st.text_input("Major", value=student.get("major", ""))
-    year = st.number_input("Year Level", 1, 4, value=student.get("year_level", 1))
+    major = st.text_input("Major", value=student.get("major") or "")
+    year = st.number_input("Year Level", 1, 4, value=int(student.get("year_level") or 1))
 with col2:
-    gpa = st.number_input("GPA", 0.0, 4.0, value=float(student.get("gpa", 0.0)), step=0.1)
-    interests = st.text_area("Research Interests", value=student.get("research_interests", ""))
+    gpa = st.number_input("GPA", 0.0, 4.0, value=float(student.get("gpa") or 0.0), step=0.1)
+    interests = st.text_area("Research Interests", value=student.get("research_interests") or "")
 
 if st.button("💾 Update Profile"):
     cursor.execute(
@@ -126,10 +138,11 @@ else:
         """)
         
         if app['status'] == 'Pending':
+            st.warning("⚠️ Note: Once you withdraw this application, you cannot reapply to this project.")
             if st.button("🗑️ Withdraw", key=f"withdraw_{app['application_id']}"):
                 cursor.execute("UPDATE Applications SET status='Withdrawn' WHERE application_id=%s", (app['application_id'],))
                 conn.commit()
-                st.success("Application withdrawn.")
+                st.success("Application withdrawn. You cannot reapply to this project.")
                 st.rerun()
         st.divider()
 
@@ -180,5 +193,12 @@ else:
                         st.rerun()
                     except mysql.connector.IntegrityError:
                         st.warning("You've already applied to this project.")
+
+# --- LOGOUT BUTTON ---
+st.divider()
+if st.button("🚪 Logout", type="secondary"):
+    st.session_state.clear()
+    st.success("Logged out successfully!")
+    st.switch_page("app.py")
 
 conn.close()

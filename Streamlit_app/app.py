@@ -32,7 +32,7 @@ with tab1:
                 if user:
                     # Store user info in session state
                     st.session_state['user'] = user
-                    st.session_state['role'] = role.lower()
+                    st.session_state['role'] = role.lower()  # Ensure lowercase
                     
                     # Store user_id based on role
                     if role.lower() == "student":
@@ -89,6 +89,12 @@ with tab2:
 
                     st.success(f"✅ {role} account created successfully! You can now log in.")
                     st.info("🔑 Please use your new credentials to log in on the Login tab.")
+                    
+                    # Clear signup form fields
+                    st.session_state.pop('signup_first', None)
+                    st.session_state.pop('signup_last', None)
+                    st.session_state.pop('signup_email', None)
+                    st.session_state.pop('signup_password', None)
 
             except Exception as e:
                 st.error(f"❌ Database error: {e}")

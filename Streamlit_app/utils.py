@@ -38,7 +38,7 @@ def verify_user(email: str, password: str, role: str):
         )
         if conn.is_connected():
             cursor = conn.cursor(dictionary=True)
-            table = "Students" if role == "Student" else "Faculty" if role == "Faculty" else "Admins"
+            table = "Students" if role == "Student" else "Faculty" if role == "Faculty" else "Admin"
 
             # ✅ Query to fetch user by email
             query = f"SELECT * FROM {table} WHERE email=%s"

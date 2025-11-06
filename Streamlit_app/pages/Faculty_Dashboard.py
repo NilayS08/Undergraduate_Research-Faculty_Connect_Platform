@@ -9,6 +9,11 @@ if "user" not in st.session_state or st.session_state["user"] is None:
     st.error("⚠️ Please log in first.")
     st.stop()
 
+# Check if user is faculty
+if st.session_state.get("role") != "faculty":
+    st.error("⚠️ Access denied. Faculty privileges required.")
+    st.stop()
+
 try:
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
@@ -20,22 +25,25 @@ except Exception as e:
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(135deg, #f0f4f8, #e9eef5);
+    background: #000000;
 }
 .card {
-    background-color: #ffffff;
+    background-color: #1a1a1a;
     border-radius: 15px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 8px rgba(255,255,255,0.08);
     padding: 22px;
     margin: 12px 0;
     transition: all 0.3s ease-in-out;
     border-left: 6px solid #2563eb;
 }
-.card:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.12); transform: translateY(-4px); }
-.card h3 { color: #1e3a8a; font-weight: 700; font-size: 20px; margin-bottom: 4px; }
-.card small { color: #6b7280; font-size: 13px; }
+.card:hover { box-shadow: 0 6px 16px rgba(255,255,255,0.12); transform: translateY(-4px); }
+.card h3 { color: #60a5fa; font-weight: 700; font-size: 20px; margin-bottom: 4px; }
+.card small { color: #9ca3af; font-size: 13px; }
+.card p { color: #d1d5db; }
 .stButton>button { background-color:#2563eb; color:white; border-radius:8px; padding:8px 20px; border:none; font-weight:500; margin-top:8px; }
 .stButton>button:hover { background-color:#1d4ed8; transform: scale(1.02); }
+h1, h2, h3 { color: #60a5fa !important; }
+p, label { color: #d1d5db !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -47,6 +55,58 @@ if not faculty_id:
     st.stop()
 
 st.title("👩‍🏫 Faculty Dashboard")
+
+# --- PROFILE CARD ---
+cursor.execute("SELECT * FROM Faculty WHERE faculty_id=%s", (faculty_id,))
+faculty = cursor.fetchone()
+
+if not faculty:
+    st.error("Faculty profile not found.")
+    st.stop()
+
+st.markdown("<div class='card'><h3>👤 My Profile</h3>", unsafe_allow_html=True)
+col1, col2 = st.columns(2)
+with col1:
+    department = st.text_input("Department", value=faculty.get("department") or "")
+with col2:
+    research_areas = st.text_area("Research Interests", value=faculty.get("research_areas") or "")
+
+if st.button("💾 Update Profile"):
+    cursor.execute(
+        "UPDATE Faculty SET department=%s, research_areas=%s WHERE faculty_id=%s",
+        (department, research_areas, faculty_id)
+    )
+    conn.commit()
+    st.success("Profile updated!")
+    st.rerun()
+st.markdown("</div>", unsafe_allow_html=True)
+
+# --- CREATE NEW PROJECT CARD ---
+st.markdown("<div class='card'><h3>➕ Create New Project</h3>", unsafe_allow_html=True)
+
+with st.form("create_project_form", clear_on_submit=True):
+    proj_title = st.text_input("Project Title", placeholder="e.g., AI-Powered Medical Diagnosis")
+    proj_description = st.text_area("Project Description", placeholder="Describe the research goals, methodology, and expected outcomes...")
+    proj_max_students = st.number_input("Maximum Students", min_value=1, max_value=20, value=3)
+    
+    submit_project = st.form_submit_button("🚀 Create Project")
+    
+    if submit_project:
+        if not proj_title or not proj_description:
+            st.warning("⚠️ Please fill in both title and description.")
+        else:
+            try:
+                cursor.execute("""
+                    INSERT INTO Research_Projects (title, description, status, max_students, faculty_id, admin_id)
+                    VALUES (%s, %s, 'Recruiting', %s, %s, NULL)
+                """, (proj_title, proj_description, proj_max_students, faculty_id))
+                conn.commit()
+                st.success(f"✅ Project '{proj_title}' created successfully!")
+                st.rerun()
+            except Exception as e:
+                st.error(f"❌ Error creating project: {e}")
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 # Show faculty's own projects
 cursor.execute("SELECT * FROM Research_Projects WHERE faculty_id = %s", (faculty_id,))
@@ -110,5 +170,12 @@ else:
                             conn.commit()
                             st.warning("Rejected.")
                             st.rerun()
+
+# --- LOGOUT BUTTON ---
+st.divider()
+if st.button("🚪 Logout", type="secondary"):
+    st.session_state.clear()
+    st.success("Logged out successfully!")
+    st.switch_page("app.py")
 
 conn.close()
