@@ -16,6 +16,7 @@ CREATE TABLE Admin (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -227,28 +228,28 @@ USE researchhub;
 -- ===============================
 -- ADMIN
 -- ===============================
-INSERT INTO Admin (first_name, last_name, email)
-VALUES ('Alice', 'Johnson', 'alice.johnson@univ.edu');
+INSERT INTO Admin (first_name, last_name, email, password)
+VALUES ('Alice', 'Johnson', 'alice.johnson@univ.edu', '$2b$12$jWzL0P5oAUdVZ.3kT117SObGbP9x/nG.Ll7FsopZzDiHtU97d/ZCe');
 
 -- ===============================
 -- FACULTY
 -- ===============================
 INSERT INTO Faculty (first_name, last_name, department, research_areas, email, password, admin_id)
 VALUES
-('John', 'Smith', 'Computer Science', 'AI, ML, Data Science', 'john.smith@univ.edu', 'faculty123', 1),
-('Emily', 'Taylor', 'Biotechnology', 'Genomics, Cell Biology', 'emily.taylor@univ.edu', 'faculty123', 1);
+('John', 'Smith', 'Computer Science', 'AI, ML, Data Science', 'john.smith@univ.edu', '$2b$12$RmUeqjx5TMd1WH8isWoHT.AuFE5jrzAva37UpGXL.yG4b/vZqr5oe', 1),
+('Emily', 'Taylor', 'Biotechnology', 'Genomics, Cell Biology', 'emily.taylor@univ.edu', '$2b$12$gII1A2/aepcRrnpfJztGTeokeA/.//FlTVh1AGxL6yGMtOCJdvxtO', 1);
 
 -- ===============================
 -- STUDENTS
 -- ===============================
 INSERT INTO Students (first_name, last_name, major, gpa, year_level, research_interests, email, password, admin_id)
 VALUES
-('Jane', 'Doe', 'Computer Science', 3.8, 3, 'AI, NLP, Data Science', 'jane.doe@univ.edu', 'student123', 1),
-('Mark', 'Lee', 'Biotechnology', 3.5, 2, 'Genetics, Lab Automation', 'mark.lee@univ.edu', 'student123', 1),
-('Aditi', 'Sharma', 'Mechanical Engineering', 3.7, 4, 'Robotics, Mechatronics', 'aditi.sharma@univ.edu', 'student123', 1);
+('Jane', 'Doe', 'Computer Science', 3.8, 3, 'AI, NLP, Data Science', 'jane.doe@univ.edu', '$2b$12$yg32Tjk14wLvxO5.dKKqOuxKc5VUrtC3oxBMSduepIs/yltUIPkOO', 1),
+('Mark', 'Lee', 'Biotechnology', 3.5, 2, 'Genetics, Lab Automation', 'mark.lee@univ.edu', '$2b$12$fK4MNKIWBvBeMmsXYTCXDOvT5KQWgUVr4BvWhziWT4.p3KCiQ/i8O', 1),
+('Aditi', 'Sharma', 'Mechanical Engineering', 3.7, 4, 'Robotics, Mechatronics', 'aditi.sharma@univ.edu', '$2b$12$1pkaZfp1CA.F6FL/Xydfk.j4p9ciw.6FmQ0pgQnEWL4AdSzvMf2nK', 1);
 
 -- ===============================
--- SKILLS
+-- SKILLS (Updated with 10 skills)
 -- ===============================
 INSERT INTO Skills (skill_name, category)
 VALUES
@@ -256,7 +257,12 @@ VALUES
 ('Machine Learning', 'AI'),
 ('Data Analysis', 'Analytical'),
 ('Robotics', 'Engineering'),
-('Genetics', 'Biology');
+('Genetics', 'Biology'),
+('Java', 'Programming'),
+('Statistical Modeling', 'Analytical'),
+('Deep Learning', 'AI'),
+('Laboratory Techniques', 'Biology'),
+('Web Development', 'Programming');
 
 -- ===============================
 -- PROJECTS
