@@ -1,0 +1,371 @@
+<mxfile host="app.diagrams.net" modified="2025-11-06T14:00:00.000Z" agent="5.0" version="24.0.0" type="device">
+  <diagram name="ResearchHub Relational Schema" id="relational-schema">
+    <mxGraphModel dx="2200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- STUDENTS TABLE -->
+        <mxCell id="students-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="200" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="students-header" value="STUDENTS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="students-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="70" as="sourcePoint" />
+            <mxPoint x="440" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="students-attrs" value="&lt;u&gt;student_id (PK)&lt;/u&gt;&lt;br&gt;first_name&lt;br&gt;last_name&lt;br&gt;major&lt;br&gt;gpa&lt;br&gt;year_level&lt;br&gt;research_interests&lt;br&gt;email&lt;br&gt;password&lt;br&gt;&lt;i&gt;admin_id (FK)&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="250" y="75" width="180" height="215" as="geometry" />
+        </mxCell>
+        
+        <!-- APPLICATIONS TABLE -->
+        <mxCell id="applications-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="180" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="applications-header" value="APPLICATIONS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="applications-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#b85450;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="40" y="70" as="sourcePoint" />
+            <mxPoint x="220" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="applications-attrs" value="&lt;u&gt;application_id (PK)&lt;/u&gt;&lt;br&gt;status&lt;br&gt;cover_letter&lt;br&gt;&lt;i&gt;student_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;project_id (FK)&lt;/i&gt;&lt;br&gt;applied_at&lt;br&gt;reviewed_at" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="75" width="160" height="135" as="geometry" />
+        </mxCell>
+        
+        <!-- RESEARCH_PROJECTS TABLE -->
+        <mxCell id="projects-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="240" y="340" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="projects-header" value="RESEARCH_PROJECTS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="240" y="340" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="projects-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#d6b656;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="370" as="sourcePoint" />
+            <mxPoint x="440" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="projects-attrs" value="&lt;u&gt;project_id (PK)&lt;/u&gt;&lt;br&gt;title&lt;br&gt;description&lt;br&gt;status&lt;br&gt;max_students&lt;br&gt;&lt;i&gt;faculty_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;admin_id (FK)&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="250" y="375" width="180" height="155" as="geometry" />
+        </mxCell>
+        
+        <!-- ADMIN TABLE -->
+        <mxCell id="admin-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="680" y="180" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-header" value="ADMIN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="680" y="180" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="210" as="sourcePoint" />
+            <mxPoint x="840" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="admin-attrs" value="&lt;u&gt;admin_id (PK)&lt;/u&gt;&lt;br&gt;first_name&lt;br&gt;last_name&lt;br&gt;email&lt;br&gt;password" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="690" y="215" width="140" height="115" as="geometry" />
+        </mxCell>
+        
+        <!-- FACULTY TABLE -->
+        <mxCell id="faculty-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="480" y="480" width="180" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="faculty-header" value="FACULTY" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="480" y="480" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="faculty-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#6c8ebf;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="510" as="sourcePoint" />
+            <mxPoint x="660" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="faculty-attrs" value="&lt;u&gt;faculty_id (PK)&lt;/u&gt;&lt;br&gt;first_name&lt;br&gt;last_name&lt;br&gt;department&lt;br&gt;research_areas&lt;br&gt;email&lt;br&gt;password&lt;br&gt;&lt;i&gt;admin_id (FK)&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="515" width="160" height="155" as="geometry" />
+        </mxCell>
+        
+        <!-- SKILLS TABLE -->
+        <mxCell id="skills-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="360" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="skills-header" value="SKILLS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="360" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="skills-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#9673a6;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1000" y="390" as="sourcePoint" />
+            <mxPoint x="1160" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="skills-attrs" value="&lt;u&gt;skill_id (PK)&lt;/u&gt;&lt;br&gt;skill_name&lt;br&gt;category" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="395" width="140" height="75" as="geometry" />
+        </mxCell>
+        
+        <!-- STUDENT_SKILLS (Junction) -->
+        <mxCell id="student-skills-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="680" y="40" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="student-skills-header" value="STUDENT_SKILLS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="680" y="40" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="student-skills-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#d79b00;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="70" as="sourcePoint" />
+            <mxPoint x="860" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="student-skills-attrs" value="&lt;u&gt;&lt;i&gt;student_id (PK, FK)&lt;/i&gt;&lt;/u&gt;&lt;br&gt;&lt;u&gt;&lt;i&gt;skill_id (PK, FK)&lt;/i&gt;&lt;/u&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="690" y="75" width="160" height="55" as="geometry" />
+        </mxCell>
+        
+        <!-- PROJECT_SKILLS (Junction) -->
+        <mxCell id="project-skills-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="720" y="380" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="project-skills-header" value="PROJECT_SKILLS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="720" y="380" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="project-skills-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#d79b00;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="410" as="sourcePoint" />
+            <mxPoint x="900" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="project-skills-attrs" value="&lt;u&gt;&lt;i&gt;project_id (PK, FK)&lt;/i&gt;&lt;/u&gt;&lt;br&gt;&lt;u&gt;&lt;i&gt;skill_id (PK, FK)&lt;/i&gt;&lt;/u&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="730" y="415" width="160" height="55" as="geometry" />
+        </mxCell>
+        
+        <!-- PROJECT_MEMBERS (Junction) -->
+        <mxCell id="project-members-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="project-members-header" value="PROJECT_MEMBERS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="340" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="project-members-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#d79b00;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="40" y="370" as="sourcePoint" />
+            <mxPoint x="220" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="project-members-attrs" value="&lt;u&gt;&lt;i&gt;project_id (PK, FK)&lt;/i&gt;&lt;/u&gt;&lt;br&gt;&lt;u&gt;&lt;i&gt;student_id (PK, FK)&lt;/i&gt;&lt;/u&gt;&lt;br&gt;joined_at" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="375" width="160" height="75" as="geometry" />
+        </mxCell>
+        
+        <!-- STUDENT_ACHIEVEMENTS -->
+        <mxCell id="achievements-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="200" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="achievements-header" value="STUDENT_ACHIEVEMENTS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="achievements-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#82b366;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="40" y="530" as="sourcePoint" />
+            <mxPoint x="240" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="achievements-attrs" value="&lt;u&gt;id (PK)&lt;/u&gt;&lt;br&gt;&lt;i&gt;student_id (FK)&lt;/i&gt;&lt;br&gt;&lt;i&gt;project_id (FK)&lt;/i&gt;&lt;br&gt;title&lt;br&gt;awarded_on" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="535" width="180" height="95" as="geometry" />
+        </mxCell>
+        
+        <!-- APPLICATION_LOGS -->
+        <mxCell id="logs-table" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="40" width="180" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="logs-header" value="APPLICATION_LOGS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="40" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="logs-line" value="" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1000" y="70" as="sourcePoint" />
+            <mxPoint x="1180" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="logs-attrs" value="&lt;u&gt;id (PK)&lt;/u&gt;&lt;br&gt;&lt;i&gt;application_id (FK)&lt;/i&gt;&lt;br&gt;student_id&lt;br&gt;project_id&lt;br&gt;old_status&lt;br&gt;new_status&lt;br&gt;changed_at" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="75" width="160" height="135" as="geometry" />
+        </mxCell>
+        
+        <!-- RELATIONSHIPS (Arrows with cardinality) -->
+        
+        <!-- Students 1:M Applications -->
+        <mxCell id="rel-students-applications" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="students-table" target="applications-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-students-applications-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-students-applications">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Projects 1:M Applications -->
+        <mxCell id="rel-projects-applications" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="projects-table" target="applications-table">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="300" />
+              <mxPoint x="40" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-projects-applications-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-projects-applications">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Admin 1:M Students -->
+        <mxCell id="rel-admin-students" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="admin-table" target="students-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-admin-students-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-admin-students">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Admin 1:M Faculty -->
+        <mxCell id="rel-admin-faculty" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="admin-table" target="faculty-table">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="400" />
+              <mxPoint x="660" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-admin-faculty-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-admin-faculty">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Admin 1:M Projects -->
+        <mxCell id="rel-admin-projects" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="admin-table" target="projects-table">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-admin-projects-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-admin-projects">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Faculty 1:M Projects -->
+        <mxCell id="rel-faculty-projects" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="faculty-table" target="projects-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-faculty-projects-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-faculty-projects">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Students M:N Student_Skills -->
+        <mxCell id="rel-students-studentskills" value="" style="endArrow=ERmany;startArrow=ERmany;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="students-table" target="student-skills-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-students-studentskills-label" value="M:N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-students-studentskills">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Skills M:N Student_Skills -->
+        <mxCell id="rel-skills-studentskills" value="" style="endArrow=ERmany;startArrow=ERmany;html=1;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="skills-table" target="student-skills-table">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="390" />
+              <mxPoint x="900" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-skills-studentskills-label" value="M:N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-skills-studentskills">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Projects M:N Project_Skills -->
+        <mxCell id="rel-projects-projectskills" value="" style="endArrow=ERmany;startArrow=ERmany;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="projects-table" target="project-skills-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-projects-projectskills-label" value="M:N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-projects-projectskills">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Skills M:N Project_Skills -->
+        <mxCell id="rel-skills-projectskills" value="" style="endArrow=ERmany;startArrow=ERmany;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="skills-table" target="project-skills-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-skills-projectskills-label" value="M:N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-skills-projectskills">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Students M:N Project_Members -->
+        <mxCell id="rel-students-members" value="" style="endArrow=ERmany;startArrow=ERmany;html=1;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="students-table" target="project-members-table">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="130" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-students-members-label" value="M:N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-students-members">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Projects M:N Project_Members -->
+        <mxCell id="rel-projects-members" value="" style="endArrow=ERmany;startArrow=ERmany;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="projects-table" target="project-members-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-projects-members-label" value="M:N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-projects-members">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Students 1:M Achievements -->
+        <mxCell id="rel-students-achievements" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="students-table" target="achievements-table">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-students-achievements-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-students-achievements">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Projects 1:M Achievements -->
+        <mxCell id="rel-projects-achievements" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;" edge="1" parent="1" source="projects-table" target="achievements-table">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-projects-achievements-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-projects-achievements">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Applications 1:M Application_Logs -->
+        <mxCell id="rel-applications-logs" value="" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;endFill=0;startFill=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="applications-table" target="logs-table">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-applications-logs-label" value="1:M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="rel-applications-logs">
+          <mxGeometry x="-0.1" y="2" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- LEGEND -->
+        <mxCell id="legend-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="520" width="280" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" value="&lt;b&gt;LEGEND&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="530" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-pk" value="&lt;u&gt;PK&lt;/u&gt; = Primary Key" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="565" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-fk" value="&lt;i&gt;FK&lt;/i&gt; = Foreign Key" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="590" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-card" value="&lt;b&gt;Cardinality:&lt;/b&gt; 1:M, M:N" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="615" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-junction" value="Orange = Junction Tables" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="640" width="240" height="20" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,325 @@
+<mxfile host="app.diagrams.net" modified="2025-11-06T12:00:00.000Z" agent="5.0" version="24.0.0" type="device">
+  <diagram name="ResearchHub ER Diagram" id="research-hub-er">
+    <mxGraphModel dx="2000" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- ENTITIES -->
+        
+        <!-- Admin Entity -->
+        <mxCell id="admin-entity" value="ADMIN" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Students Entity -->
+        <mxCell id="students-entity" value="STUDENTS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="280" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Faculty Entity -->
+        <mxCell id="faculty-entity" value="FACULTY" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="280" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Research Projects Entity -->
+        <mxCell id="projects-entity" value="RESEARCH_PROJECTS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="680" y="380" width="160" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Applications Entity -->
+        <mxCell id="applications-entity" value="APPLICATIONS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="680" y="200" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Skills Entity -->
+        <mxCell id="skills-entity" value="SKILLS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1000" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Student_Skills (Junction Table) -->
+        <mxCell id="student-skills-entity" value="STUDENT_SKILLS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="680" y="80" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Project_Skills (Junction Table) -->
+        <mxCell id="project-skills-entity" value="PROJECT_SKILLS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1000" y="380" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Project_Members (Junction Table) -->
+        <mxCell id="project-members-entity" value="PROJECT_MEMBERS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="680" y="520" width="160" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Student_Achievements -->
+        <mxCell id="achievements-entity" value="STUDENT_ACHIEVEMENTS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1000" y="520" width="180" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Application_Logs -->
+        <mxCell id="logs-entity" value="APPLICATION_LOGS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1000" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- RELATIONSHIP DIAMONDS -->
+        
+        <!-- MANAGES (Admin-Students) -->
+        <mxCell id="manages-students-rel" value="MANAGES" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="80" y="70" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- MANAGES (Admin-Faculty) -->
+        <mxCell id="manages-faculty-rel" value="MANAGES" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="80" y="350" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- CREATES (Faculty-Projects) -->
+        <mxCell id="creates-rel" value="CREATES" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="480" y="450" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- APPLIES_TO (Students-Applications) -->
+        <mxCell id="applies-rel" value="APPLIES_TO" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="480" y="80" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- RECEIVES (Projects-Applications) -->
+        <mxCell id="receives-rel" value="RECEIVES" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="690" y="300" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- REQUIRES (Projects-Skills via Project_Skills) -->
+        <mxCell id="requires-rel" value="REQUIRES" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="300" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- HAS_SKILL (Students-Skills via Student_Skills) -->
+        <mxCell id="has-skill-rel" value="HAS_SKILL" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="840" y="80" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- WORKS_ON (Students-Projects via Project_Members) -->
+        <mxCell id="works-on-rel" value="WORKS_ON" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="480" y="280" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- ACHIEVES (Students-Achievements) -->
+        <mxCell id="achieves-rel" value="ACHIEVES" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="480" y="180" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- LOGS (Applications-Application_Logs) -->
+        <mxCell id="logs-rel" value="LOGS" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff4c3;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="840" y="140" width="120" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- CONNECTIONS -->
+        
+        <!-- Admin -> MANAGES (Students) -->
+        <mxCell id="admin-manages-students-1" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin-entity" target="manages-students-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-manages-students-1-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="admin-manages-students-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="admin-manages-students-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="manages-students-rel" target="students-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-manages-students-2-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="admin-manages-students-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Admin -> MANAGES (Faculty) -->
+        <mxCell id="admin-manages-faculty-1" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="admin-entity" target="manages-faculty-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-manages-faculty-1-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="admin-manages-faculty-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="admin-manages-faculty-2" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="faculty-entity" target="manages-faculty-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="admin-manages-faculty-2-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="admin-manages-faculty-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Faculty -> CREATES -> Projects -->
+        <mxCell id="faculty-creates-1" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="faculty-entity" target="creates-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="faculty-creates-1-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="faculty-creates-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="faculty-creates-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="creates-rel" target="projects-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="faculty-creates-2-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="faculty-creates-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Students -> APPLIES_TO -> Applications -->
+        <mxCell id="students-applies-1" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="students-entity" target="applies-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="students-applies-1-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="students-applies-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="students-applies-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="applies-rel" target="applications-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="students-applies-2-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="students-applies-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Projects -> RECEIVES -> Applications -->
+        <mxCell id="projects-receives-1" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="projects-entity" target="receives-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="projects-receives-1-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="projects-receives-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="projects-receives-2" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="receives-rel" target="applications-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="projects-receives-2-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="projects-receives-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Students -> Student_Skills -->
+        <mxCell id="students-studentskills" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="students-entity" target="student-skills-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="students-studentskills-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="students-studentskills">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Student_Skills -> HAS_SKILL -> Skills -->
+        <mxCell id="studentskills-hasskill-1" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="student-skills-entity" target="has-skill-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="studentskills-hasskill-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="has-skill-rel" target="skills-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="studentskills-hasskill-2-label" value="M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="studentskills-hasskill-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Projects -> Project_Skills -->
+        <mxCell id="projects-projectskills" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="projects-entity" target="project-skills-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="projects-projectskills-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="projects-projectskills">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Project_Skills -> REQUIRES -> Skills -->
+        <mxCell id="projectskills-requires-1" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="project-skills-entity" target="requires-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="projectskills-requires-2" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="requires-rel" target="skills-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="projectskills-requires-2-label" value="M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="projectskills-requires-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Students -> WORKS_ON -> Project_Members -->
+        <mxCell id="students-workson-1" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="students-entity" target="works-on-rel">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="students-workson-1-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="students-workson-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="students-workson-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="works-on-rel" target="project-members-entity">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="360" />
+              <mxPoint x="600" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Projects -> Project_Members -->
+        <mxCell id="projects-members" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="projects-entity" target="project-members-entity">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="projects-members-label" value="M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="projects-members">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Students -> ACHIEVES -> Achievements -->
+        <mxCell id="students-achieves-1" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="students-entity" target="achieves-rel">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="140" />
+              <mxPoint x="400" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="students-achieves-1-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="students-achieves-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="students-achieves-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="achieves-rel" target="achievements-entity">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="220" />
+              <mxPoint x="900" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="students-achieves-2-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="students-achieves-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Projects -> Achievements -->
+        <mxCell id="projects-achievements" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="projects-entity" target="achievements-entity">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="840" y="440" />
+              <mxPoint x="920" y="440" />
+              <mxPoint x="920" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="projects-achievements-label" value="M" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="projects-achievements">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <!-- Applications -> LOGS -> Application_Logs -->
+        <mxCell id="applications-logs-1" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="applications-entity" target="logs-rel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="applications-logs-1-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="applications-logs-1">
+          <mxGeometry x="-0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+        <mxCell id="applications-logs-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="logs-rel" target="logs-entity">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="140" />
+              <mxPoint x="960" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="applications-logs-2-label" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="applications-logs-2">
+          <mxGeometry x="0.6" y="-1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

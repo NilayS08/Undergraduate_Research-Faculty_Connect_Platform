@@ -137,6 +137,19 @@ CREATE TABLE Student_Achievements (
         REFERENCES Research_Projects(project_id) ON DELETE CASCADE
 );
 
+-- NEW: table to store application status change logs
+CREATE TABLE IF NOT EXISTS Application_Logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    application_id INT NOT NULL,
+    student_id INT,
+    project_id INT,
+    old_status ENUM('Pending','Accepted','Rejected','Withdrawn'),
+    new_status ENUM('Pending','Accepted','Rejected','Withdrawn'),
+    changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_log_application FOREIGN KEY (application_id)
+        REFERENCES Applications(application_id) ON DELETE CASCADE
+);
+
 -- -----------------------------
 -- INDEXES
 -- -----------------------------
@@ -195,6 +208,27 @@ BEGIN
     INSERT IGNORE INTO Project_Members (project_id, student_id)
     VALUES (v_project_id, v_student_id);
 END$$
+
+-- NEW: procedure to withdraw an application and remove project membership if present
+CREATE PROCEDURE withdraw_application(IN p_application_id INT)
+BEGIN
+    DECLARE v_project_id INT;
+    DECLARE v_student_id INT;
+
+    SELECT project_id, student_id
+    INTO v_project_id, v_student_id
+    FROM Applications
+    WHERE application_id = p_application_id;
+
+    UPDATE Applications
+    SET status = 'Withdrawn'
+    WHERE application_id = p_application_id;
+
+    -- if the student was previously a project member, remove them
+    DELETE FROM Project_Members
+    WHERE project_id = v_project_id AND student_id = v_student_id;
+END$$
+
 DELIMITER ;
 
 -- -----------------------------
@@ -211,6 +245,17 @@ BEGIN
         SELECT a.student_id, NEW.project_id, CONCAT('Completed: ', NEW.title), NOW()
         FROM Applications a
         WHERE a.project_id = NEW.project_id AND a.status = 'Accepted';
+    END IF;
+END$$
+
+-- NEW: trigger to log status changes on Applications
+CREATE TRIGGER trg_log_application_status_change
+AFTER UPDATE ON Applications
+FOR EACH ROW
+BEGIN
+    IF OLD.status <> NEW.status THEN
+        INSERT INTO Application_Logs (application_id, student_id, project_id, old_status, new_status, changed_at)
+        VALUES (NEW.application_id, NEW.student_id, NEW.project_id, OLD.status, NEW.status, NOW());
     END IF;
 END$$
 

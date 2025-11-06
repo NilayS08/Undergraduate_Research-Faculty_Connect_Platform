@@ -140,7 +140,7 @@ else:
         if app['status'] == 'Pending':
             st.warning("⚠️ Note: Once you withdraw this application, you cannot reapply to this project.")
             if st.button("🗑️ Withdraw", key=f"withdraw_{app['application_id']}"):
-                cursor.execute("UPDATE Applications SET status='Withdrawn' WHERE application_id=%s", (app['application_id'],))
+                cursor.execute("CALL withdraw_application(%s)", (app['application_id'],))
                 conn.commit()
                 st.success("Application withdrawn. You cannot reapply to this project.")
                 st.rerun()
